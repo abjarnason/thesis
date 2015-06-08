@@ -68,7 +68,50 @@ The data provider serves JSON or random text and binary data over a HTTP-based A
 
 \section{Benchmarking}
 
+What kind of machines where used for the benchmarking tests. What version of Node was used (why did I pick that version for testing -> stability and the version that is provided in the repostitories of Ubuntu, Debian, CentOS etc.). Where is the bottle neck in this system -> not in the memory usage so it makes more sense to "scale out" than "scale up". How did the benchmarking take place -> new client connection every 2 seconds until clients start to drop connections (why did that happen..). Used iptraf to measure the data sending rate. Why did I choose to measure the things presented here? Do we really benefit from using more cores?! -> does not seem to be so (something about the single threadedness of Node and how that limits something..)
+
+\begin{figure}[h!]
+	\centering
+	\subfigure[4GB RAM / 2 CPUs]{\label{fig:freeMemory-2cpus}\includegraphics[width=0.45\textwidth]{images/freeMemory-2cpus}} \hfill
+	\subfigure[8GB RAM / 4 CPUs]{\label{fig:freeMemory-4cpus}\includegraphics[width=0.45\textwidth]{images/freeMemory-4cpus}}
+	\caption{Free memory (MB)}
+\end{figure}
+
+\begin{figure}[h!]
+	\centering
+	\subfigure[4GB RAM / 2 CPUs]{\label{fig:cpuTime-2cpus}\includegraphics[width=0.45\textwidth]{images/cpuTime-2cpus}} \hfill
+	\subfigure[8GB RAM / 4 CPUs]{\label{fig:cpuTime-4cpus}\includegraphics[width=0.45\textwidth]{images/cpuTime-4cpus}}
+	\caption{CPU time  (ms)}
+\end{figure}
+
+\begin{figure}[h!]
+	\centering
+	\subfigure[4GB RAM / 2 CPUs]{\label{fig:v8heapUsed-2cpus}\includegraphics[width=0.45\textwidth]{images/v8heapUsed-2cpus}} \hfill
+	\subfigure[8GB RAM / 4 CPUs]{\label{fig:v8heapUsed-4cpus}\includegraphics[width=0.45\textwidth]{images/v8heapUsed-4cpus}}
+	\caption{V8 heap used (MB)}
+\end{figure}
+
+\begin{figure}[h!]
+	\centering
+	\subfigure[4GB RAM / 2 CPUs]{\label{fig:fullGcs-2cpus}\includegraphics[width=0.45\textwidth]{images/fullGcs-2cpus}} \hfill
+	\subfigure[8GB RAM / 4 CPUs]{\label{fig:fullGcs-4cpus}\includegraphics[width=0.45\textwidth]{images/fullGcs-4cpus}}
+	\caption{Full garbage collections per minute}
+\end{figure}
+
+\begin{table}[h!]
+\begin{tabular}{lll}
+\hline
+	& \textbf{4GB RAM / 2 CPUs}	&	\textbf{8GB RAM / 4 CPUs} \\ \hline
+\textbf{Concurrent connections}	& 304	& 333 \\
+\textbf{Data sent (MB/sec)}	& 46,34	& 47,17 \\
+\hline                         
+\end{tabular}
+\caption{Number of concurrent connections and data rate}
+\label{table:connectionsDatarate}
+\end{table}
 
 \section{Possible Improvements}
+
+Use a different version of Node (a newer V8 engine might do something..)
 
 
