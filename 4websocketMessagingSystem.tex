@@ -72,7 +72,7 @@ The purpose of the benchmarking tests was to figure out how many concurrent clie
 \\ \\
 The load test was implemented so that a new client connects to the WebSocket server every two seconds and requests a 130 KB JSON file every second. The benchmarking was done for two different instance types, one with 4GB RAM  and 2 CPUs and another one with 8GB RAM and 4 CPUs. Both instances had SSD drives and were located in a datacenter in Frankfurt with the clients that made request located in Iceland. Version 0.10.38 of Node.js (the minor version provided in repositories of most common Linux distros) was used to run all the components of the system that were deployed on a Ubuntu 14.04.2 LTS OS with a 3.13.0-52 Linux kernel. The Nodetime\footnote{\url{https://nodetime.com/}} application monitoring and analytics service was for performance measurement in addition to the \texttt{iptraf} Unix tool for network monitoring.
 \\ \\
-The metrics of the benchmarking test were: Available memory, CPU time, V8 heap used and full garbage collections while the WebSocket messaging system was able to cope with increasing number of concurrent client connections. The results can be seen in the graphs below.
+The metrics of the benchmarking test were: Available memory, CPU time, V8 heap used and full garbage collections while the WebSocket messaging system was able to cope with increasing number of concurrent client connections. The results can be seen in figures that follow.
 
 \begin{figure}[h!]
 	\centering
@@ -80,6 +80,8 @@ The metrics of the benchmarking test were: Available memory, CPU time, V8 heap u
 	\subfigure[8GB RAM / 4 CPUs]{\label{fig:freeMemory-4cpus}\includegraphics[width=0.45\textwidth]{images/freeMemory-4cpus}}
 	\caption{Free memory (MB)}
 \end{figure}
+
+This is the most interesting one. We can see a clear point when the instance runs out of memory and starts to drop connections. In the case of the 2 CPU instance it is the 
 
 \begin{figure}[h!]
 	\centering
@@ -103,6 +105,7 @@ The metrics of the benchmarking test were: Available memory, CPU time, V8 heap u
 \end{figure}
 
 \begin{table}[h!]
+\centering
 \begin{tabular}{lll}
 \hline
 	& \textbf{4GB RAM / 2 CPUs}	&	\textbf{8GB RAM / 4 CPUs} \\ \hline
@@ -114,7 +117,9 @@ The metrics of the benchmarking test were: Available memory, CPU time, V8 heap u
 \label{table:connectionsDatarate}
 \end{table}
 
-\section{Possible Improvements}
+
+
+\section{Possible Improvements and Further Work}
 
 Use a different version of Node (a newer V8 engine might do something..)
 
