@@ -68,7 +68,11 @@ The data provider serves JSON or random text and binary data over a HTTP-based A
 
 \section{Benchmarking}
 
-What kind of machines where used for the benchmarking tests. What version of Node was used (why did I pick that version for testing -> stability and the version that is provided in the repostitories of Ubuntu, Debian, CentOS etc.). Where is the bottle neck in this system -> not in the memory usage so it makes more sense to "scale out" than "scale up". How did the benchmarking take place -> new client connection every 2 seconds until clients start to drop connections (why did that happen..). Used iptraf to measure the data sending rate. Why did I choose to measure the things presented here? Do we really benefit from using more cores?! -> does not seem to be so (something about the single threadedness of Node and how that limits something..)
+The purpose of the benchmarking tests was to figure out how many concurrent clients the messaging system could handle without dropping connections. The results can be used as a basis for capacity planning of a WebSocket-based infrastructure or used to analyse the WebSocket messaging system for further development.
+\\ \\
+The load test was implemented so that a new client connects to the WebSocket server every two seconds and requests a 130 KB JSON file every second. The benchmarking was done for two different instance types, one with 4GB RAM  and 2 CPUs and another one with 8GB RAM and 4 CPUs. Both instances had SSD drives and were located in a datacenter in Frankfurt with the clients that made request located in Iceland. Version 0.10.38 of Node.js (the minor version provided in repositories of most common Linux distros) was used to run all the components of the system that were deployed on a Ubuntu 14.04.2 LTS OS with a 3.13.0-52 Linux kernel. The Nodetime\footnote{\url{https://nodetime.com/}} application monitoring and analytics service was for performance measurement in addition to the \texttt{iptraf} Unix tool for network monitoring.
+\\ \\
+The metrics of the benchmarking test were: Available memory, CPU time, V8 heap used and full garbage collections while the WebSocket messaging system was able to cope with increasing number of concurrent client connections. The results can be seen in the graphs below.
 
 \begin{figure}[h!]
 	\centering
