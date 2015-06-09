@@ -93,7 +93,7 @@ Figures~\ref{fig:freeMemory-2cpus} and~\ref{fig:cpuTime-4cpus} clearly show how 
 \end{figure}
 
 \noindent
-As can be expected the time used for processing instructions by the CPUs increase incrementally with the number of concurrent connection. Further analysis would be required to determine exactly how the CPU time is shared between different programs on the instances. That would be required to evaluate the benefit of the clustering implementation of the fetcher in messaging system. The true benefit of the worker pool used by the fetcher likely more related to the possibility to have concurrent network calls rather than parallel processing threads.
+As can be expected the time used for processing instructions by the CPUs increase incrementally with the number of concurrent connection as shown in figures~\ref{fig:cpuTime-2cpus} and~\ref{fig:cpuTime-4cpus}. Further analysis would be required to determine exactly how the CPU time is shared between different programs on the instances. That would be required to evaluate the benefit of the clustering implementation of the fetcher in messaging system. The true benefit of the worker pool used by the fetcher likely more related to the possibility to have concurrent network calls rather than parallel processing threads.
 \\
 \begin{figure}[h!]
 	\centering
@@ -102,6 +102,9 @@ As can be expected the time used for processing instructions by the CPUs increas
 	\caption{V8 heap used (MB)}
 \end{figure}
 
+\noindent
+Figures~\ref{fig:v8heapUsed-2cpus} and~\ref{fig:v8heapUsed-4cpus} show memory used for heap bookkeeping by the V8 JavaScript engine. It is hard to identify any special pattern in the figures as heap management is a low level operation with numerous different spaces so further analysis would be needed to truly understand what is going on. A possible approach for better heap management would be to use a newer version of Node.js. Version 0.10.38 (released in March 2015) uses a version of the V8 JavaScript engine that was released in October 2012\footnote{\url{https://code.google.com/p/v8/source/browse/trunk/ChangeLog}}. One of the main reasons behind io.js, the community driven fork of Node.js, was the slow adoption of newer versions of the V8 JavaScript engine. Future versions of Node.js should ship with a more up do date version of the V8 JavaScript engine as the two projects have been merged.
+\\
 \begin{figure}[h!]
 	\centering
 	\subfigure[4GB RAM / 2 CPUs]{\label{fig:fullGcs-2cpus}\includegraphics[width=0.45\textwidth]{images/fullGcs-2cpus}} \hfill
@@ -109,12 +112,15 @@ As can be expected the time used for processing instructions by the CPUs increas
 	\caption{Full garbage collections per minute}
 \end{figure}
 
+\noindent
+As more clients connect to the WebSocket server the garbage collector kicks in more frequently which slows down overall performance because of increased memory usage. Figures~\ref{fig:fullGcs-2cpus} and~\ref{fig:fullGcs-4cpus} clearly show how the garbage collector tries to free up memory more frequently which eats up the CPU time as the load on the WebSocket server increases with more concurrent connections. When the garbage collector can not manage to free up sufficient memory the clients start to lose their connections. There does not seem to be much difference in the capability of each instance with regards to successful garbage collection which is another indicator that a that a horizontal scaling strategy might be more suitable for the messaging system than a vertical one.
+\\
 \begin{table}[h!]
 \centering
 \begin{tabular}{lll}
 \hline
-	& \textbf{4GB RAM / 2 CPUs}	&	\textbf{8GB RAM / 4 CPUs} \\ \hline
-\textbf{Concurrent connections}	& 304	& 333 \\
+	& \textbf{4GB RAM/2 CPUs}	&	\textbf{8GB RAM/4 CPUs} \\ \hline
+\textbf{Concurrent clients}	& 304	& 333 \\
 \textbf{Data sent (MB/sec)}	& 46,34	& 47,17 \\
 \hline                         
 \end{tabular}
