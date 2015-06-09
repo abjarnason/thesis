@@ -120,17 +120,20 @@ As more clients connect to the WebSocket server the garbage collector kicks in m
 \begin{tabular}{lll}
 \hline
 	& \textbf{4GB RAM/2 CPUs}	&	\textbf{8GB RAM/4 CPUs} \\ \hline
-\textbf{Concurrent clients}	& 304	& 333 \\
-\textbf{Data sent (MB/sec)}	& 46,34	& 47,17 \\
+\begin{tabular}[v]{@{}c@{}}\textbf{Maximum concurrent}\\\textbf{clients (\#)}\end{tabular} & 304	& 333 \\
+\begin{tabular}[v]{@{}c@{}}\textbf{Average outgoing}\\\textbf{rate (MB/sec)}\end{tabular} & 46,34	& 47,17 \\
 \hline                         
 \end{tabular}
-\caption{Number of concurrent connections and data rate}
+\caption{Number of concurrent client connections and the rate of data transfer}
 \label{table:connectionsDatarate}
 \end{table}
 
-
+\noindent
+The maximum number of concurrent connections and average outgoing data rate during the load test is another indicator that the computational capabilities of the instances has a minimum effect on the performance of the WebSocket messaging system. The number of concurrent clients seems to be determined by the performance of the V8 JavaScript engine as seen before. The outgoing data rate can possibly be increased by configuring the network for increased bandwidth but that possibility depends on how the system is deployed. In the case when a public cloud service is used it can introduce a challenge as the control over the underlying infrastructure is often minimum. It is thus important to choose an infrastructure for deployment that allows enough control so that it can be tuned specially for this use case. The other option would be to adjust the WebSocket messaging system to the underlying infrastructure. In either case it is important to have a good understanding of how both the system and the environment where it is deployed. The best way to achieve that understanding is to monitor the system when it has been put into production use and make required configurations as they become evident.
 
 \section{Possible Improvements and Further Work}
+
+Improve the performance of the V8 engine. Do something to increase outgoing datarate
 
 Use a different version of Node (a newer V8 engine might do something..)
 
