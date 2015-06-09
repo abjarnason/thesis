@@ -8,7 +8,7 @@ This chapter provides a historical background of the real-time web and an introd
 The web has gone through tremendous changes since the original \textit{Proposal for a HyperText Project} by Tim Berners-Lee and Robert Cailliau was published in 1990. The authors of the proposal envisioned an information system consisting of nodes in a network. These nodes would contain information of various kinds that a user could browse \cite{berners1990worldwideweb}. The web was initially intended for static content so the first version of HTTP was optimized for synchronous request-response communication \cite{berners1991original}. The emergence of client-side scripting languages, in the mid-nineties, paved the way for web applications capable of asynchronous communication. JavaScript and the XMLHttpRequest API became the core components in a set of web development techniques, termed AJAX, that could be used to fetch and display content on websites without requiring a full page reload \cite{garrett2005ajax}.
 \\ \\
 The next major step in the development of web applications largely revolved around simulating server-push events to mimic real-time behavior. As HTTP uses a request-response paradigm (Figure~\ref{fig:request-response}) it is not a suitable protocol for applications with real-time functionality. Nevertheless, quite a few solutions to work around the limitations of HTTP were invented. The solutions can be used to provide functionality that end-users experience as real-time despite the half-duplex nature of HTTP. The first of the solution to emerge was polling (Figure~\ref{fig:polling}) followed by long-polling (Figure~\ref{fig:long-polling}) and streaming (Figure~\ref{fig:streaming}).
-
+\\
 \begin{figure}[h!]
 	\centering
 	\subfigure[Request-response]{\label{fig:request-response}\includegraphics[width=0.45\textwidth]{images/request-response}} \hfill
@@ -23,7 +23,7 @@ Polling is a technique used by clients to retrieve data from a server by making 
 Long-polling is a techniques where a server responds to a hanging client request when new data is available. This techniques can lead to long-lived HTTP connections or timeouts if new data is not readily available moments after a client request. When a client either receives a response to a request or a timeout occurs it can open up a new hanging request for more data. Long-polling is an attempt to reduce the amount of unnecessary data transfer and network load caused by polling. This technique can work well for application with unpredictable data updates but in the case of high message volume or periodic data updates it does not provide performance improvement over polling \cite{grigorik2013high}. Long-polling is currently among the most widely used techniques for real-time data transfer on the web and is a popular fallback strategy for other real-time solutions \cite{modernizr}.
 \\ \\
 Streaming is similar to long-polling in the way that a client initiates a long-lived HTTP request that the server responds when new data is available. The main difference is that a server that has responded to a streaming request does not close the connections after it has responded. That can be a problem with regards to firewalls and web proxies that might buffer the responses which can lead to unreliable data transfer. Another problem is the lack of standardization as this technology is implemented differently across different browsers. This inconsistency makes streaming hard to implement into web applications that should provide the same functionality across different browsers. Streaming was supposed to address some of the issues with long-polling but did not manage to gain attraction because of its disharmony with the underlying infrastructure of the web and lack of standardization \cite{grigorik2013high}.
-
+\\
 \begin{figure}[h!]
 	\centering
 	\subfigure[Long-polling]{\label{fig:long-polling}\includegraphics[width=0.45\textwidth]{images/long-polling}} \hfill
@@ -37,7 +37,7 @@ The underlying problem with the solutions presented before is that they are atte
 \section{WebSocket}
 
 WebSocket is a standard for a full-duplex, bidirectional, single-socket connection over a single TCP connection. The WebSocket API is being standardized by the W3C and the WebSocket protocol has been standardized by the IETF as RFC 6455 \cite{hickson2011websocket,fette2011websocket}. The main goal of WebSocket is to provide a standardized, bidirectional communication mechanism for web applications. It is a thin layer on top of TCP that adds minor functionality to ensure compliance with the constraints of the web and existing HTTP infrastructure. WebSocket is not solely applicable to web applications and is intended to be extensible so future versions can be adjusted to be used any client and server application.
-
+\\
 \begin{table}[h!]
 \centering
 \begin{tabular}{llll}
@@ -61,7 +61,7 @@ The WebSocket API is an interface for the WebSocket protocol to initiate a bidir
 \subsection{The WebSocket Protocol}
 
 The WebSocket protocol consists of an opening handshake, a data transfer phase and a closing handshake \cite{fette2011websocket}. The handshake starts with a HTTP request with a \texttt{Upgrade} field in the header where the client asks to upgrade the HTTP connection to the WebSocket protocol
-
+\\
 \begin{figure}[h!]
 \begin{verbatim}
 GET wss://echo.websocket.org/?encoding=text HTTP/1.1
@@ -75,7 +75,7 @@ Sec-WebSocket-Key: soYsLdq15l8jOlybHiiHZg==
 \caption{Request headers of a WebSocket upgrade handshake}
 \label{request-headers}
 \end{figure}
-
+\ \\
 \begin{figure}[h!]
 \begin{verbatim}
 HTTP/1.1 101 Web Socket Protocol Handshake
@@ -90,7 +90,7 @@ Upgrade: websocket
 
 \noindent
 The data transfer phase begins after a successful opening handshake. In the WebSocket protocol, data is transferred through a sequence of frames that are combined to form a logical application message. The WebSocket API is only concerned with messages while the WebSocket protocol takes care of splitting the messages into the frames, transporting them over a network, reassembling at the receivers end and finally notifies the receiver after a whole message has been received. A client sent WebSocket frame has 6 - 14 bytes of overhead and a server-sent one has 2 - 10 bytes. The different frame overhead size results from the payload length being represented in a variable length-field which allows small messages to use compact encoding while allowing the protocol to carry larger messages. Figure~\ref{protocol-framing} shows the WebSocket protocol framing.
-
+\\
 \begin{figure}[h!]
 \begin{verbatim}
  0                   1                   2                   3

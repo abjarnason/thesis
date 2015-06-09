@@ -14,7 +14,7 @@ While microservices have some clear benefits they also introduce various challen
 \section{Asynchronous Communication}
 
 As chat applications are event-based by nature they benefit most from system architecture than can handle asynchronous collaboration between different components. The two main challenges associated with asynchronous systems, from the perspective of microservices, are how events are emitted and how consumers are informed of emitted events \cite{newman2015building}. Messages brokers, a type of message oriented middleware, are typically used to solve those problems. Most brokers can handle subscriptions and the state of consumers allowing a loosely coupled system architecture. Among messaging patterns, suitable for asynchronous event-based communication, are publish/subscribe and push/pull.
-
+\\
 \begin{figure}[h!]
 	\centering
 	\subfigure[Publish-Subscribe]{\raisebox{15mm}{\label{fig:pub-sub}\includegraphics[width=0.45\textwidth]{images/pub-sub}}} \hfill
@@ -31,7 +31,7 @@ Push/pull, in the context of messaging brokers, can be seen as a pipelined form 
 \section{Container-Based Virtualization}
 
 A container is a virtualized runtime environment that runs as an application on a shared operating system. Container-based virtualization requires less overhead than hypervisor-based virtualization. The kernel and system libraries of the underlying operating system are shared and abstracted in the case of containers while the hypervisor abstracts the whole host machine in the case of virtual machines. This light-weight nature makes it possible to run more containers than virtual machine on the same underlying hardware and attain considerably shorter boot time.
-
+\\
 \begin{figure}[h!]
 	\subfigure[Standard virtualization]{\label{fig:standard-virtualization}\includegraphics[width=0.45\textwidth]{images/standard-virtualization}} \hfill
 	\subfigure[Container-based virtualization]{\raisebox{8mm}{\label{fig:containers}\includegraphics[width=0.45\textwidth]{images/containers}}}
