@@ -23,10 +23,51 @@ The deciding factor whether a client and a server successfully manage to establi
 
 Encrypted WebSocket traffic (\texttt{wss://} on port 443) is more predictable than unencrypted traffic since it is less dependent on the intermediaries on the connection path. In the case of explicit proxies a TLS handshake takes place after a successful WebSocket connection upgrade handshake. Afterwards an encrypted and unhampered WebSocket communication channel is established between a client and a server. When a WebSocket connection is established in the presence of transparent proxies a successful handshake is considerably more likely as the communication is encrypted and proxies are generally configured to accept that kind of traffic. TLS encrypted traffic leads to slightly increased CPU consumption on both sides of the communication but its benefits significantly outweigh that drawback.
 
-\subsection{Fallback Strategies}
+\subsection{Fallback Strategies and WebSocket Abstractions}
 
-In addition to the possible issues proxy servers and other intermediaries can cause for WebSocket traffic some older browsers lack support for the protocol. Currently, all modern browsers \footnote{\url{http://caniuse.com/websocket}} support the protocol but WebSocket applications that are intended for widespread use and corporate environments, where older browsers might be common, should have a decent fallback strategy. Because of the uncertainty in the environment where WebSocket applications can be deployed polyfills, which are libraries that implement a standard API using legacy browser features, can be a good solution. In the case of WebSocket a polyfill library would use HTTP-based communication patterns like polling or long-polling as fallback options. Another option would be to use a plugin, like Adobe Flash, capable of establishing a full-duplex communication channel with TCP sockets. That option use usually the least favorable one as it requires the user to explicitly install the plugin which can lead to a bad user experience.
+In addition to the possible issues proxy servers and other intermediaries can cause for WebSocket traffic some older browsers lack support for the protocol. Currently, all modern browsers\footnote{\url{http://caniuse.com/websocket}} support the protocol but WebSocket applications that are intended for widespread use and corporate environments, where older browsers might be common, should have a decent fallback strategy. Because of the uncertainty in the environment where WebSocket applications can be deployed polyfills, which are libraries that implement a standard API using legacy browser features, can be a good solution. In the case of WebSocket a polyfill library would use HTTP-based communication patterns like polling or long-polling as fallback options. Another option would be to use a plugin, like Adobe Flash, capable of establishing a full-duplex communication channel with TCP sockets. That option use usually the least favorable one as it requires the user to explicitly install the plugin which can lead to a bad user experience.
 \\ \\
-Engine.io \footnote{\url{https://github.com/Automattic/engine.io}} is a Node.js WebSocket implementation that adds increased reliability when establishing a WebSocket connection between a client and a server. The most important design decision of Engine.io is that communication is initiated with a long-polling connection that is upgraded to better transports that are tested during the first moments of the connection establishment. This approach to WebSocket connection establishment is based on empirical experience working with the protocol in production environments in the vicinity of proxies and other network intermediaries. Experiments even seem to indicate that a WebSocket abstraction like Engine.io can increase data throughput without a significant impact on permornace \cite{ozger2014websocket}. There exists numerous other WebSocket implementations and frameworks that add different levels of abstractions and connection management. These extensions seem to be necessary to increase the reliability of unencrypted WebSocket traffic while the majority of the underlying infrastructure of the web is predominantly configure for HTTP traffic.
+Engine.io\footnote{\url{https://github.com/Automattic/engine.io}} is a Node.js WebSocket implementation that adds increased reliability when establishing a WebSocket connection between a client and a server. The most important design decision of Engine.io is that communication is initiated with a long-polling connection that is upgraded to better transports that are tested during the first moments of the connection establishment. This approach to WebSocket connection establishment is based on empirical experience working with the protocol in production environments in the vicinity of proxies and other network intermediaries. Experiments even seem to indicate that a WebSocket abstraction like Engine.io can increase data throughput without a significant impact on permornace \cite{ozger2014websocket}. There exists numerous other WebSocket implementations and frameworks that add different levels of abstractions and connection management. These extensions seem to be necessary to increase the reliability of unencrypted WebSocket traffic while the majority of the underlying infrastructure of the web is predominantly configure for HTTP traffic.
 
-\subsection{Comparison of Unencrypted, Encrypted and Abstracted WebSocket Connection Establishment}
+\subsection{WebSocket Connection Establishment Analysis}
+
+For the analysis of WebSocket connection establishment, network traffic of an echo server for unencrypted, encrypted and abstracted WebSocket traffic was recorded. The purpose of the analysis is to better understand how the WebSocket protocol will behave in a production environment and evaluate how reliable WebSocket-based communication can be implemented.
+\\ \\
+The data in the analysis was generated through periodic data transfer of text and binary data following the different WebSocket connection establishments. The network traffic was captured with the \texttt{tcpdump} Unix tool and the data was presented with Wireshark\footnote{\url{https://www.wireshark.org/}}, the package analysis tool.
+\\
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=1\textwidth]{images/ws_dump}
+	\caption{Network traffic for a \texttt{ws://} connection establishment}
+	\label{fig:wsTraffic}
+\end{figure}
+
+\noindent
+The interesting parts of figure~\ref{fig:wsTraffic} are package No. 4, where the client requests a connection upgrade, and package No. 6 where the server inform the client of a protocol switch to upgrade the connection from HTTP to WebSocket. After the connection establishment data flows between the client and server using the WebSocket protocol. This kind of network traffic would be filtered in many network environments because of its difference from standard HTTP traffic.
+\\
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=1\textwidth]{images/wss_dump}
+	\caption{Network traffic for a \texttt{wss://} connection establishment}
+	\label{fig:wssTraffic}
+\end{figure}
+
+\noindent
+Connection establishment using \texttt{wss://} is largely hidden from network tools like can be seen in figure~\ref{fig:wssTraffic}. This is the reason WebSocket traffic over TLS is more likely to succeed than unencrypted WebSocket traffic. Package No. 4 shows the beginning of the TLS handshake, package No. 6 shows the certificate exchange and package No. 8 shows the key exchange. Afterwards, the application data is encrypted and network intermediaries treat it like regular HTTPS traffic which makes long-lived WebSocket connections possible.
+\\ \\
+Figure~\ref{fig:engineioTraffic} shows stuffs..
+
+This complicated procedure seems to be the best solution to establish unencrypted WebSocket connections in accordance with the current infrastructure of the web..
+\newpage
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=1\textwidth]{images/engineio_dump}
+	\caption{Network traffic for an abstracted \texttt{ws://} connection establishment using Engine.io}
+	\label{fig:engineioTraffic}
+\end{figure}
+
+\subsection{Other Deployment Considerations}
+
+\section{Containerized Deployment}
+
+\subsection{Docker}
