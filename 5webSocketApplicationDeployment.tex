@@ -29,7 +29,7 @@ In addition to the possible issues proxy servers and other intermediaries can ca
 \\ \\
 Engine.io\footnote{\url{https://github.com/Automattic/engine.io}} is a Node.js WebSocket implementation that adds increased reliability when establishing a WebSocket connection between a client and a server. The most important design decision of Engine.io is that communication is initiated with a long-polling connection that is upgraded to better transports that are tested during the first moments of the connection establishment. This approach to WebSocket connection establishment is based on empirical experience working with the protocol in production environments in the vicinity of proxies and other network intermediaries. Experiments even seem to indicate that a WebSocket abstraction like Engine.io can increase data throughput without a significant impact on permornace \cite{ozger2014websocket}. There exists numerous other WebSocket implementations and frameworks that add different levels of abstractions and connection management. These extensions seem to be necessary to increase the reliability of unencrypted WebSocket traffic while the majority of the underlying infrastructure of the web is predominantly configure for HTTP traffic.
 
-\subsection{WebSocket Connection Establishment Analysis}
+\subsection{WebSocket Connection Analysis}
 
 For the analysis of WebSocket connection establishment, network traffic of an echo server for unencrypted, encrypted and abstracted WebSocket traffic was recorded. The purpose of the analysis is to better understand how the WebSocket protocol will behave in a production environment and evaluate how reliable WebSocket-based communication can be implemented.
 \\ \\
@@ -37,7 +37,7 @@ The data in the analysis was generated through periodic data transfer of text an
 \\
 \begin{figure}[h!]
 	\centering
-	\includegraphics[width=1\textwidth]{images/ws_dump}
+	\makebox[\textwidth][c]{\includegraphics[width=1.2\textwidth]{images/ws_dump}}
 	\caption{Network traffic for a \texttt{ws://} connection establishment}
 	\label{fig:wsTraffic}
 \end{figure}
@@ -47,7 +47,7 @@ The interesting parts of figure~\ref{fig:wsTraffic} are package No. 4, where the
 \\
 \begin{figure}[h!]
 	\centering
-	\includegraphics[width=1\textwidth]{images/wss_dump}
+	\makebox[\textwidth][c]{\includegraphics[width=1.2\textwidth]{images/wss_dump}}
 	\caption{Network traffic for a \texttt{wss://} connection establishment}
 	\label{fig:wssTraffic}
 \end{figure}
@@ -60,14 +60,14 @@ Figure~\ref{fig:engineioTraffic} shows the process of establishing a bidirection
 \newpage
 \begin{figure}[h!]
 	\centering
-	\includegraphics[width=1\textwidth]{images/engineio_dump}
+	\makebox[\textwidth][c]{\includegraphics[width=1.2\textwidth]{images/engineio_dump}}
 	\caption{Network traffic for an abstracted \texttt{ws://} connection establishment using Engine.io}
 	\label{fig:engineioTraffic}
 \end{figure}
 
 \section{Containerized WebSocket Infrastructure}
 
-Something general about Docker..
+As mentioned in Chapter~\ref{chapter:microservices} , the benefits of deploying applications in containers can be quite appealing compared to more traditional virtualization solutions. Docker\footnote{url{https://www.docker.com/}} is a platform for the creation and distribution of containers built on top of the existing Linux container technology. In addition to the general benefits of microservices the main advantages of Docker are application portability and the prospect of rapid application deployment. Appendix~\ref{chapter:appendix-binaryTextEchoServer} shows a Dockerfile (instructions used by Docker to automatically build an image) for the text/binary echo server used in the WebSocket connection analysis. For the management of more sophisticated containerized infrastructure supporting services and software such as cluster management, service discovery tools and advanced networking capabilities it needed to take full advantage of Docker.
 
 \subsection{Deploying Containers}
 
