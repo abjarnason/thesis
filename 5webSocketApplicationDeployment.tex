@@ -1,7 +1,7 @@
 \chapter{WebSocket Application Deployment}
 \label{chapter:webSocketApplicationDeployment}
 
-This chapter introduces various considerations when deploying WebSocket applications and talks about containerized deployment and other deployment considerations..
+This chapter introduces various considerations when deploying WebSocket applications and talks about containerized deployment and other deployment considerations. This chapter introduces various considerations when deploying WebSocket applications and talks about containerized deployment and other deployment considerations.
 
 \section{WebSocket Connection Types}
 
@@ -13,7 +13,7 @@ The deciding factor whether a client and a server successfully manage to establi
 \\
 \begin{figure}[h!]
 	\centering
-	\includegraphics[width=0.9\textwidth]{images/websocketProxyServer}
+	\includegraphics[width=0.8\textwidth]{images/websocketProxyServer}
 	\caption{Interaction between WebSocket applications and proxy servers \cite{wang2013definitive}}
 	\label{fig:webSocketMessagingSystem}
 \end{figure}
@@ -67,33 +67,15 @@ Figure~\ref{fig:engineioTraffic} shows the process of establishing a bidirection
 
 \section{Containerized WebSocket Infrastructure}
 
-As mentioned in Chapter~\ref{chapter:microservices} , the benefits of deploying applications in containers can be quite appealing compared to more traditional virtualization solutions. Docker\footnote{url{https://www.docker.com/}} is a platform for the creation and distribution of containers built on top of the existing Linux container technology. In addition to the general benefits of microservices the main advantages of Docker are application portability and the prospect of rapid application deployment. Appendix~\ref{chapter:appendix-binaryTextEchoServer} shows a Dockerfile (instructions used by Docker to automatically build an image) for the text/binary echo server used in the WebSocket connection analysis. For the management of more sophisticated containerized infrastructure supporting services and software such as cluster management, service discovery tools and advanced networking capabilities it needed to take full advantage of Docker.
+As mentioned in Chapter~\ref{chapter:microservices} , the benefits of deploying applications in containers can be quite appealing compared to more traditional virtualization solutions. Docker\footnote{\url{https://www.docker.com/}} is a platform for the creation and distribution of containers built on top of the existing Linux container technology. In addition to the general benefits of microservices the main advantages of Docker are application portability and the prospect of rapid application deployment. Appendix~\ref{chapter:appendix-binaryTextEchoServer} shows a Dockerfile (instructions used by Docker to automatically build an image) for the text/binary echo server used in the WebSocket connection analysis. For the management of more sophisticated "dockerized" infrastructure supporting services such as cluster management, service discovery tools and advanced networking capabilities are needed. Docker and its ecosystem is still relatively young so many of these services are still in early development stages and \textit{de facto} standards are yet to be decided. The recommended best practices and supporting services will be decided in the coming future as this technology gets more established.
 
-\subsection{Deploying Containers}
 
-\begin{itemize}
-\item How to deploy
-\item How to manage (continuous integration something..)
-\item How are Netflix, Spotify etc. using Docker in production..
-\item name drop some common tools: docker-compose, ...
-\item A couple of Dockerfile files in the appendix
-\item talk about linking containers (as can be seen in the setup of monitoring in the next chapter)
-\item container orchestration..
-\end{itemize}
+\subsection{Deploying Containerized Infrastructure}
 
-\subsection{Monitoring Containers}
+The currently most common way of deploying containers is to use a VM as a host for one or more containers. This method was used to deploy the applications and services developed as a part of this thesis using Ubuntu 14.04 LTS as the host system. It is not the ideal solution as it introduces additional overhead and makes scaling more cumbersome later in the deployment process. At the moment this approach seems to be the best one available as it provides more isolation from other users if a shared hosting services is being used for deployment and also makes it possible to reserve kernel resources. Most of the specialized Docker hosting services, offered by the likes of Amazon Web Services and Google, use a similar approach by provisioning a VM that is then used to host the containers even though it is possible to provision bare-metal machines for running Docker hosts \cite{mouat2015docker}.
+\\ \\
+The Docker host must be a Linux OS with kernel version 3.10 or newer which makes distributions like Ubuntu 14.04 LTS \footnote{\url{http://releases.ubuntu.com/14.04/}}, Debian 8\footnote{\url{https://www.debian.org/}} and CentOS 7\footnote{\url{http://www.centos.org/}} into possible candidates \cite{dockerBinaries}. For larger clusters it might be sensible to use distribution specially intended for hosting containers like CoreOS\footnote{\url{https://coreos.com/}} which provide the minimal functionality required for containerized application deployment. For a cluster of hosts it is practical to use a configuration management tool for management and ensuring that the Docker hosts and images are up-to-date. The two most common approaches to container management are to treat the containers like VMs whose content can be updated or to view the containers as black boxes that can be replaced but not modified. The advantage of the later approach is that it is easier to keep track of the content of each container through commit tags or a specialized tagging system. Monitoring is another important aspect of container management because the number of run-time environments is usually much greater in systems that are built based on the ideas of microservices. Like with other supporting services in the Docker ecosystem there are multiple available solutions for monitoring suitable for different use cases.
 
-\begin{itemize}
-\item Why is it important to monitor
-\item how to set up monitoring with cAdvisor, influxdb and Grafana..
-\end{itemize}
-
-\section{Other Deployment Considerations}
+\subsection{WebSocket-related Deployment Considerations}
 
 In addition to deciding a suitable communication strategy there are other factors that must be taken into consideration when deploying WebSocket applications. Network intermediaries that can impact deployed services are either located on the path between its users and the internet or between its servers and the internet. Most often it is impossible to influence the configuration of the users network and proxies on external networks so communication strategies like the ones that have been mentioned before must be utilized. As the adoption of HTTP/2 increases networks will more commonly be configured to allow long-lived connection which will increase the effectiveness of the WebSocket protocol. Infrastructure on the serving path that can be configured and is intended for WebSocket traffic should be tuned for long-lived connections. That is something that takes special care as most network infrastructure is configured by default for short lived HTTP traffic. Nginx for example is configured to timeout connections that have been idle for 60 seconds unless the timeout interval is specially increase like can be seen in the configuration file in Appendix~\ref{chapter:chapter:appendix-reverseProxy}. The number of expected concurrent connections must also be taken into account as most Unix systems have a pre-configured limit on the number of open sockets. This limit can be seen with the \texttt{ulimit -a} command and is usually set at 1024. To increase the limit the \texttt{-n} flag can be used (\texttt{ulimit -n 2048} to double the default limit of allowed concurrent sockets). Other areas of consideration include identifying critical areas more monitoring, introducing ping intervals to prevent connection timeouts and identifying where throttling might improve performance. WebSocket-based applications introduce a range of operational challenges not associated with HTTP-based applications that must be dealt with accordingly if the benefits of the protocol are to be fully reaped.
-
-\begin{itemize}
-\item Browser support?!
-\item protocol extensions
-
-\end{itemize}
