@@ -1,13 +1,11 @@
 \chapter{WebSocket Messaging System}
 \label{chapter:websocketMessagingSystem}
 
-This chapter provides information regarding the requirements and tooling for a WebSocket based messaging system. Afterwards the design and implementation of the system itself is introduced before benchmarking results and ideas for possible improvements are presented.
-
 \section{Requirements}
 
-The WebSocket messaging system allows a web chat client to communicate with a backend service using the WebSocket protocol rather than polling or long-polling. The system should be an improvement over HTTP-based implementations as it causes less network load and information can be updated instantly when available. The system must be capable of serving multiple concurrent clients while guaranteeing reliable message delivery.
+The WebSocket messaging system presented in this chapter allows a web chat client to communicate with a back end service using the WebSocket protocol rather than polling or long-polling. The system is supposed to be an improvement over HTTP-based implementations as it causes less network load and information can be updated near-instantly when available. The system is capable capable of serving multiple concurrent clients and seems to ensure reliable message delivery upto a certain number of concurrent client connections.
 \\ \\
-The development of the WebSocket messaging system takes place while a HTTP-based implementation is in production. Thus it must be able to co-exist with the current implementation and be functional with the same backend setup. The components of the system should consist of modular and exchangeable microservices so that individual parts of the system can be scaled independently. Finally the system should be able to run on a Linux-based infrastructure.
+The development of the WebSocket-based messaging system takes place alongside a HTTP-based implementation that is currently being used in production. The system is able to co-exist with the current back end implementation and is aimed to be functional with the same back end setup. The components of the system consist of modular and exchangeable components built on the design principles of microservices so that individual parts of the system can be scaled independently. The system is intended for Linux-based infrastructure that supports containerized runtime environments.
 
 \section{Tools}
 
