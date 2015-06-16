@@ -1,1 +1,0 @@
-/home/asgeir/Projects/node-ws/ws-server/loadtest.js

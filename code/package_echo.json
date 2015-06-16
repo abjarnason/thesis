@@ -1,0 +1,15 @@
+{
+  "name": "engineio-text-binary-server",
+  "description": "A WebSocket echo server",
+  "author": "Asgeir Bjarnason",
+  "version": "1.0.0",
+  "dependencies": {
+    "engine.io": "^1.5.1",
+    "engine.io-client": "^1.5.1",
+    "ws": "^0.7.2"
+  },
+  "engines": {
+    "node": "0.10.x",
+    "npm": "1.4.x"
+  }
+}

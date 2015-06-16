@@ -1,0 +1,20 @@
+{
+  "name": "ws-server",
+  "description": "WebSocket server",
+  "author": "Asgeir Bjarnason",
+  "version": "1.0.0",
+  "dependencies": {
+    "async": "^1.1.0",
+    "body-parser": "^1.12.4",
+    "engine.io": "^1.5.1",
+    "express": "^4.12.4",
+    "npmlog": "1.2.1",
+    "request": "^2.57.0",
+    "ws": "^0.7.2",
+    "zmq": "^2.11.1"
+  },
+  "engines": {
+    "node": "0.10.x",
+    "npm": "1.4.x"
+  }
+}
