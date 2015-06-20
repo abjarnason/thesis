@@ -14,10 +14,15 @@
   year={1991}
 }
 
-@article{garrett2005ajax,
-  title={Ajax: A new approach to web applications},
-  author={Garrett, Jesse James and others},
-  year={2005}
+@article{paulson2005building,
+  title={Building rich web applications with Ajax},
+  author={Paulson, Linda Dailey},
+  journal={Computer},
+  volume={38},
+  number={10},
+  pages={14--17},
+  year={2005},
+  publisher={IEEE}
 }
 
 @article{pimentel2012communicating,
@@ -41,7 +46,8 @@
 @misc{modernizr,
   author={Paul Irish},
   title={HTML5 Cross Browser Polyfills},
-  note={Github: \url{https://github.com/Modernizr/Modernizr/wiki/HTML5-Cross-Browser-Polyfills#web-sockets}}
+  howpublished={webpage},
+  note={\url{https://github.com/Modernizr/Modernizr/wiki/HTML5-Cross-Browser-Polyfills#web-sockets}}
 }
 
 @article{hickson2011websocket,
@@ -51,10 +57,18 @@
   year={2011}
 }
 
-@article{fette2011websocket,
+@techreport{fette2011websocket,
   title={The websocket protocol},
   author={Fette, Ian and Melnikov, Alexey},
-  year={2011}
+  howpublished = {Internet Requests for Comments},
+  type="{Request for Comments}",
+  number=6455,
+  year={2011},
+  month={December},
+  issn = {2070-1721},
+  publisher = "{Internet Engineering Task Force (IETF)}",
+  institution = "{Internet Engineering Task Force (IETF)}",
+  note={\url{https://tools.ietf.org/html/rfc6455}, accessed: \today}
 }
 
 @book{wang2013definitive,
@@ -98,10 +112,16 @@
   year={2012}
 }
 
-@article{alvestrand2014overview,
+@techreport{alvestrand2014overview,
   title={Overview: real time protocols for browser-based applications},
   author={Alvestrand, Harald T},
-  year={2014}
+  howpublished = {Internet-Draft},
+  type="{Internet-Draft}",
+  year={2014},
+  month={June},
+  publisher = "{Internet Engineering Task Force (IETF)}",
+  institution = "{Internet Engineering Task Force (IETF)}",
+  note={\url{https://tools.ietf.org/html/draft-ietf-rtcweb-overview-14}, accessed: \today}
 }
 
 @article{johnston2013taking,
@@ -115,16 +135,30 @@
   publisher={IEEE}
 }
 
-@article{belshe2014hypertext,
-  title={Hypertext transfer protocol version 2},
+@techreport{belshe2014hypertext,
+  title={Hypertext Transfer Protocol Version 2 (HTTP/2)},
   author={Belshe, Mike and Thomson, Martin and Peon, Roberto},
-  year={2014}
+  howpublished = {Internet Requests for Comments},
+  type="{RFC}",
+  number=7540,
+  year={2015},
+  month={May},
+  issn = {2070-1721},
+  publisher = "{Internet Engineering Task Force (IETF)}",
+  institution = "{Internet Engineering Task Force (IETF)}",
+  note={\url{https://tools.ietf.org/html/rfc7540}, accessed: \today}
 }
 
-@article{hirano2014websocketoverhttp2,
+@techreport{hirano2014websocketoverhttp2,
   title={WebSocket over HTTP/2},
   author={Hirano, Yutaka},
-  year={2014}
+  howpublished = {Internet-Draft},
+  type="{Internet-Draft}",
+  year={2014},
+  month={February},
+  publisher = "{Internet Engineering Task Force (IETF)}",
+  institution = "{Internet Engineering Task Force (IETF)}",
+  note={\url{http://tools.ietf.org/html/draft-hirano-httpbis-websocket-over-http2-00}, accessed: \today}
 }
 
 @book{raymond2003art,
@@ -138,12 +172,13 @@
   title={Building Microservices},
   author={Newman, Sam},
   year={2015},
-  publisher={" O'Reilly Media, Inc."}
+  publisher={"O'Reilly Media, Inc."}
 }
 
 @article{deutsch2004eight,
   title={The eight fallacies of distributed computing},
   author={Deutsch, Peter},
+   howpublished={webpage},
   journal={URL: http://today. java. net/jag/Fallacies. html},
   year={2004}
 }
@@ -166,27 +201,29 @@
 	year={2015},
 	publisher={NGINX, Inc.},
 	howpublished={webpage},
-	note={\url{http://nginx.com/blog/microservices-at-netflix-architectural-best-practices/}. Accessed: \today}		
+	note={\url{http://nginx.com/blog/microservices-at-netflix-architectural-best-practices/}. accessed: \today}		
 }
 
 @misc{hintjens2010zeromq,
   title={ZeroMQ: The Guide},
   author={Hintjens, Pieter},
-  year={2010}
+  year={2010},
+  howpublished={webpage},
+  note={\url{http://zguide.zeromq.org/}}
 }
 
 @misc{linuxContainers,
 	title={Infrastructure for container projects},
 	author={LinuxContainers.org},
 	howpublished={webpage},
-	note={\url{https://linuxcontainers.org/}. Accessed: \today}
+	note={\url{https://linuxcontainers.org/}. accessed: \today}
 }
 
 @misc{nodeCluster,
 	title={Cluster},
 	author={Node.js-Foundation},
 	howpublished={webpage},
-	note={\url{https://nodejs.org/api/cluster.html}, Accessed: \today}
+	note={\url{https://nodejs.org/api/cluster.html}, accessed: \today}
 }
 
 @misc{judd2008node,
@@ -201,7 +238,7 @@
 	author={Deniz Ozger},
 	year={2014},
 	howpublished={webpage},
-	note={\url{https://medium.com/denizozger/finding-the-right-node-js-websocket-implementation-b63bfca0539}, Accessed: \today}
+	note={\url{https://medium.com/denizozger/finding-the-right-node-js-websocket-implementation-b63bfca0539}, accessed: \today}
 }
 
 @book{mouat2015docker,
@@ -215,7 +252,7 @@
 	title={Binaries},
 	author={Docker-Inc.},
 	howpublished={webpage},
-	note={\url{https://docs.docker.com/installation/binaries/}, Accessed: \today}
+	note={\url{https://docs.docker.com/installation/binaries/}, accessed: \today}
 }
 
 @book{mccarthy2008comet,
@@ -225,7 +262,7 @@
   publisher={Apress}
 }
 
-@techreport{loreto2011known,
+@article{loreto2011known,
   title={Known issues and best practices for the use of long polling and streaming in bidirectional http},
   author={Loreto, Salvatore and Saint-Andre, P and Salsano, S and Wilkins, G},
   year={2011}
@@ -241,19 +278,29 @@
 }
 
 @misc{tilkovMicroservices,
-	title={Don?t start with a monolith when your goal is a microservices architecture},
+	title={Don't start with a monolith when your goal is a microservices architecture},
 	author={Stefan Tilkov},
 	howpublished={webpage},
-	note={\url{http://martinfowler.com/articles/dont-start-monolith.html}},
+	note={\url{http://martinfowler.com/articles/dont-start-monolith.html}, accessed: \today},
 	publisher={Martin Fowler}
 }
 
 @misc{nginxWebsocket,
-	tite={NGINX WebSocket Performance},
+	title={NGINX WebSocket Performance},
 	author={Nginx-Inc.},
 	howpublished={webpage},
 	note={\url{http://nginx.com/blog/nginx-websockets-performance/}}
 }
+
+@misc{modard2015websocket,
+	title={Load-balancing Websockets on EC2},
+	author={Philippe Modard},
+	year={2015},
+	howpublished={webpage},
+	note={\url{https://medium.com/Philmod/load-balancing-websockets-on-ec2-1da94584a5e9}, accessed: \today}
+}
+
+
 
 %@Misc{howfindinfo,
 %  author =	 {{Aalto University Library}},
@@ -261,7 +308,7 @@
 %  month =	 {March 2},
 %  year =	 2011,
 %  note =	 {How to find - brief guide to finding
-%                  publications and information. Accessed 4.3.2011},
+%                  publications and information. accessed 4.3.2011},
 %  annote =	 {Introduction where in the library systems different
 %                  kind of publications are stored}
 %}
@@ -280,7 +327,7 @@
 %  author =	 {{IPDC} Forum},
 %  year =     {2004},
 %  note =	 {{WWW} page of the IPDC Forum:
-%                  \url{http://www.bmcoforum.org/index.php?id=6}. Accessed
+%                  \url{http://www.bmcoforum.org/index.php?id=6}. accessed
 %                   18 Feb 2004.}
 %}
 %
@@ -337,7 +384,7 @@
 %  title =    {Instruction pages: Diplomityö},
 %  year =     {2010},
 %  note =     {\url{http://information.tkk.fi/fi/opinnot/tietotekniikka/diplomityo/} (in Finnish),
-%              \url{http://information.tkk.fi/en/studies/cse/thesis/} (in English). Accessed 9.2.2011}
+%              \url{http://information.tkk.fi/en/studies/cse/thesis/} (in English). accessed 9.2.2011}
 %}
 %
 %@misc{ThesisGrading,
@@ -354,14 +401,14 @@
 %  author =   {{TeX Users Group}},
 %  title =    {{TeX Live}},
 %  year =     {2010},
-%  note =     {\url{http://www.tug.org/texlive/}. Accessed 25.2.2011.}
+%  note =     {\url{http://www.tug.org/texlive/}. accessed 25.2.2011.}
 %}
 %
 %@misc{MiKTeX,
 %  author =   {{Christian Schenk}},
 %  title =    {{MiKTeX}},
 %  year =     {2010},
-%  note =     {\url{http://miktex.org/}. Accessed 25.2.2011.}
+%  note =     {\url{http://miktex.org/}. accessed 25.2.2011.}
 %}
 %
 %
@@ -369,14 +416,14 @@
 %  author =   {Taavi Hupponen and Kimmo Karlsson and Jani Laitinen and Oskar Ojala and Antti Pirinen and Esa Seuranen and Laura Takkinen and von Loesch, Boris and Vestbø, Tor Arne},
 %  title =    {{TeXlipse plugin for {E}clipse}},
 %  year =     {2010},
-%  note =     {\url{http://texlipse.sourceforge.net/}. Accessed 25.2.2011.}
+%  note =     {\url{http://texlipse.sourceforge.net/}. accessed 25.2.2011.}
 %}
 %
 %@misc{Eclipse,
 %  author =   {{The Eclipse Foundation}},
 %  title =    {{Eclipse}},
 %  year =     {2011},
-%  note =     {\url{http://eclipse.org/}. Accessed 25.2.2011.}
+%  note =     {\url{http://eclipse.org/}. accessed 25.2.2011.}
 %}
 %
 %
@@ -387,7 +434,7 @@
 %  howpublished = {webpage},
 %  month =	 {March 2},
 %  year =	 2011,
-%  note =     {\url{http://otalib.aalto.fi/en/instructions/guides/citations/bibliography/}. Accessed
+%  note =     {\url{http://otalib.aalto.fi/en/instructions/guides/citations/bibliography/}. accessed
 %                  4.2.2011},
 %  annote =	 {Introduction how to make bibliography either with
 %                  Harvard or Vancouver style}
@@ -399,7 +446,7 @@
 %  month =	 {March 2},
 %  year =	 2011,
 %  note =	 {How to find - brief guide to finding
-%                  publications and information. Accessed 4.3.2011},
+%                  publications and information. accessed 4.3.2011},
 %  annote =	 {Introduction where in the library systems different
 %                  kind of publications are stored}
 %}
