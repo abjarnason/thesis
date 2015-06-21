@@ -296,11 +296,11 @@
 % You can just fix the texts there. Just remember to check all the language
 % variants you use (they are all there in the same place). 
 % ------------------------------------------------------------------
-\newcommand{\TITLE}{WebSocket and Chat Applications}
+\newcommand{\TITLE}{WebSocket:}
 %\newcommand{\FTITLE}{Ohjelmistoprosessit mänteille:}
 %\newcommand{\STITLE}{Den stora stygga vargen:}
-\newcommand{\SUBTITLE}{a working title..}
-%\newcommand{\FSUBTITLE}{Uusi organisaatio, uudet pyörät}
+\newcommand{\SUBTITLE}{Development and Deployment of a Fine-Grained Messaging System}
+%\FSUBTITLE}{Uusi organisaatio, uudet pyörät}
 %\newcommand{\SSUBTITLE}{Lilla Vargens universum}
 \newcommand{\DATE}{\today}
 %\newcommand{\FDATE}{18. kesäkuuta 2011}
@@ -454,7 +454,11 @@
 
 % Abstract in English
 % ------------------------------------------------------------------
-\thesisabstract{english}{ToDo..}
+\thesisabstract{english}{WebSocket is a standard that provides full-duplex communication channels over a single TCP connection between clients and servers. It was designed to be a standard for real-time communication on the web and coexist with the current infrastructure of the web. However, network intermediaries, like proxies and load balancers, usually have to be configured specially to allow long-lived connections like the ones WebSocket provides. This can introduce challenges when deploying WebSocket infrastructure for production use.
+\\ \\
+This thesis presents a messaging system that allows a web chat client to communicate with a back end service using the WebSocket protocol rather than HTTP-based solutions. The system is designed based on the principles of microservices consisting of loosely coupled and fine-grained components. Results from a bench marking test are presented for the identification of bottlenecks in the messaging system and as a basis for capacity planning. Finally, WebSocket deployment considerations are presented through the experimentation with containerized virtualization that provides suitable run-time environments for microservices architecture.
+\\ \\
+The results from this thesis are seen as a starting point for further development of the WebSocket messaging system and an opportunity to get a better understanding of operational challenges related to WebSocket-based infrastructure. The results presented in this thesis are general and can be applied to similar use cases}
 
 % Abstract in Finnish
 % ------------------------------------------------------------------
